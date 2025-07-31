@@ -1,7 +1,35 @@
 import BlogCard from "./BlogCard";
+import { useGetPostQuery } from '@/redux/Post/Post.jsx'
+
+
+
+
+
+
+
+
+
+
 
 const FeaturedPosts = () => {
-  // Mock data - in a real app, this would come from an API
+
+
+
+  const { data, isLoading } = useGetPostQuery();
+  const PostData = data?.data?.data ?? [];
+  const currentPage = data?.data?.data?.current_page;
+  const lastPage = data?.data?.data?.last_page;
+
+
+
+
+
+
+
+
+
+
+
   const featuredPosts = [
     {
       id: "1",
@@ -124,7 +152,7 @@ const FeaturedPosts = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPosts.slice(1).concat(recentPosts).map((post) => (
+            {PostData.map((post) => (
               <BlogCard key={post.id} post={post} />
             ))}
           </div>

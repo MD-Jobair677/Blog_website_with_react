@@ -4,29 +4,77 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  publishedAt: string;
-  author: {
-    name: string;
-    avatar: string;
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  avatar: string | null;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Tag {
+  id: number;
+  name: string;
+  slug: string;
+  created_at: string;
+  updated_at: string;
+  pivot: {
+    post_id: number;
+    tag_id: number;
   };
-  image: string;
-  featured?: boolean;
 }
 
-interface BlogCardProps {
-  post: BlogPost;
+interface Media {
+  id: number;
+  file_name: string;
+  file_path: string;
+  file_type: string;
+  file_size: number;
+  slug: string;
+  user_id: number;
+  post_id: number;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SeoMeta {
+  [key: string]: string;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  cover_image: string | null;
+  is_published: string;
+  user_id: number;
+  seo_meta: SeoMeta;
+  scheduled_at: string;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  tags: Tag[];
+  media: Media[];
+}
+
+
+type PostProps = {
+  post: Post;
   variant?: "default" | "featured" | "compact";
-}
+};
 
-const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
+const BlogCard = ({ post, variant = "default" }: PostProps) => {
   const isFeature = variant === "featured";
   const isCompact = variant === "compact";
+
+  console.log(post.user)
 
   return (
     <Card className={cn(
@@ -39,16 +87,25 @@ const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
         isFeature ? "h-64 lg:h-80" : isCompact ? "h-48" : "h-56"
       )}>
         <img
-          src={post.image}
+          src={post.media && post.media.length > 0 ? post.media[0].file_path : ""}
           alt={post.title}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        
+
         {/* Category Badge */}
         <Badge className="absolute top-4 left-4 bg-blog-primary hover:bg-blog-primary-light text-white">
-          {post.category}
+          {post.title}
+
+
+
+
+
+
+
         </Badge>
+
+
       </div>
 
       <CardContent className={cn("p-6", isCompact && "p-4")}>
@@ -56,10 +113,10 @@ const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
         <div className="flex items-center space-x-4 text-sm text-blog-text-light mb-3">
           <div className="flex items-center space-x-1">
             <Clock className="h-4 w-4" />
-            <span>{post.readTime}</span>
+            <span>{post.scheduled_at}</span>
           </div>
           <span>•</span>
-          <span>{post.publishedAt}</span>
+          <span>{post.published_at}</span>
         </div>
 
         {/* Title */}
@@ -78,14 +135,26 @@ const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
           {post.excerpt}
         </p>
 
+
+        <div className="mt-1">
+          {post.tags && post.tags.length > 0 ? (
+            post.tags.map((tag, index) => (
+              <span key={index} className="text-xs bg-white text-black px-1 py-0.5 rounded mr-1">
+                #{tag.name}
+              </span>
+            ))
+          ) : (
+            <p className="text-xs">No tags found</p>
+          )}
+        </div>
         {/* Author and Read More */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={post.author.avatar} alt={post.author.name} />
-              <AvatarFallback>{post.author.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              <AvatarImage src={post.user?.name} alt={post.user?.name} />
+              <AvatarFallback>{post.user?.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
-            <span className="text-sm font-medium text-blog-text">{post.author.name}</span>
+            <span className="text-sm font-medium text-blog-text">{post.user?.name}</span>
           </div>
 
           <div className="flex items-center text-blog-primary text-sm font-medium group-hover:text-blog-primary-light transition-colors">

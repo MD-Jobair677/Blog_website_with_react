@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRegisterUserMutation } from '../../redux/AuthSlice/Auth';
 import { useDispatch } from 'react-redux';
 import {setCredentials} from '../../redux/AuthSlice/authSlice.jsx'
+import { Link } from "react-router-dom";
 const Registration = () => {
 
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Registration = () => {
                 dispatch(
                     setCredentials({
                         token: response.token,
-                        user: response.userData,
+                        userData: response.userData,
                     })
                 );
 
@@ -175,7 +176,7 @@ const Registration = () => {
                         Register
                     </button>
                     <p className="text-center text-sm mt-4">
-                        Already have an account? <a href="/login" className="text-green-600 hover:underline">Login</a>
+                        Already have an account? <Link to={"/login"} className="text-green-600 hover:underline" >Login</Link>
                     </p>
                 </form>
             </div>

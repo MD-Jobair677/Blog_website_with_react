@@ -15,6 +15,8 @@ import IndexUI from "@/pagesUI/IndexUI";
 import AddTag from "./components/dashboard/Tag/AddTag";
 import EditTag from "./components/dashboard/Tag/EditTag";
 import SingleTag from "./components/dashboard/Tag/SingleTag";
+import Comment from "@/pagesUI/Comment";
+import UserProfile from "@/components/dashboard/UserProfile/UserProfile"
 
 
 const queryClient = new QueryClient();
@@ -27,9 +29,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<Index />} /> */}
-          <Route path="/" element={<Registration />} />
+          <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/index" element={<Index />} />
+          <Route path="/dashboard" element={<Index />} />
           <Route path="/show/all/post" element={<ShowAllPost />} />
           <Route path="/posts/new" element={<AddPost />} />
           <Route path="/post/:id" element={<SinglePost />} />
@@ -43,6 +45,10 @@ const App = () => (
   <Route path="/single/tag/:id" element={<SingleTag />} />
   <Route path="/show/all/tag" element={<AddTag />} />
 
+  {/* TODO: Replace the dummy post object with real data as needed */}
+  <Route path="/comment" element={<Comment post={{ id: 1, title: "Sample Post", content: "Sample content" }} />} />
+  <Route path="/user/profile" element={<UserProfile  />} />
+
 
 
 
@@ -55,7 +61,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
 
 
-           <Route path="/indexui" element={<IndexUI />} />
+           <Route path="/index" element={<IndexUI />} />
 
           {/* UI ROUTE */}
 

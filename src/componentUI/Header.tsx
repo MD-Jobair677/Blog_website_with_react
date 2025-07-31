@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+import { Link } from "react-router-dom";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -56,6 +57,15 @@ const Header = () => {
               Subscribe
             </Button>
 
+            <Link to="/dashboard">
+              <img
+                className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                src="/docs/images/people/profile-picture-5.jpg"
+                alt="Bordered avatar"
+              />
+
+              
+            </Link>
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
@@ -100,6 +110,7 @@ const Header = () => {
             <Button className="w-full bg-blog-primary hover:bg-blog-primary-light text-white">
               Subscribe
             </Button>
+
           </div>
         </div>
       </div>

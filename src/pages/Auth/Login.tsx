@@ -3,6 +3,7 @@ import { useLoginUserMutation } from '../../redux/AuthSlice/auth.jsx'
 import { setCredentials } from '../../redux/AuthSlice/authSlice.jsx'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -103,7 +104,7 @@ const Login = () => {
                         Login
                     </button>
                     <p className="text-center text-sm mt-4">
-                        Don't have an account? <a href="/register" className="text-blue-600 hover:underline">Register</a>
+                        Don't have an account? <Link to={"/register"} className="text-blue-600 hover:underline">Register</Link>
                     </p>
                 </form>
             </div>

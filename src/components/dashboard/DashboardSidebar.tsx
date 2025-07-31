@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/collapsible";
 
 const navigationItems = [
-  { title: "Dashboard", url: "/", icon: Home },
+  { title: "Dashboard", url: "/dashboard", icon: Home },
   { 
     title: "Posts", 
     icon: FileText,
