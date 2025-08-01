@@ -1,5 +1,6 @@
 import BlogCard from "./BlogCard";
 import { useGetPostQuery } from '@/redux/Post/Post.jsx'
+import { Link } from "react-router-dom";
 
 
 
@@ -7,23 +8,51 @@ import { useGetPostQuery } from '@/redux/Post/Post.jsx'
 
 
 
+interface FeaturedPostsProps {
+  showAll?: boolean;
+}
 
 
+const FeaturedPosts = ({ showAll=true  }: FeaturedPostsProps) => {
+
+let showContent;
+
+if (showAll) {
+  showContent = (
+    <div className="flex items-center justify-between mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-blog-text">Latest Articles</h2>
+      <Link to="/" className="text-blog-primary hover:text-blog-primary-light font-medium">
+      ← Back to Home
+    
+      </Link>
+    </div>
+  );
+} else {
+  showContent = (
 
 
-const FeaturedPosts = () => {
+    <div className="flex items-center justify-between mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-blog-text">Latest Articles</h2>
+      <Link to="/view/all/post" className="text-blog-primary hover:text-blog-primary-light font-medium">
+      View All →
+    
+      </Link>
+    </div>
 
-
+  );
+}
 
   const { data, isLoading } = useGetPostQuery();
   const PostData = data?.data?.data ?? [];
   const currentPage = data?.data?.data?.current_page;
   const lastPage = data?.data?.data?.last_page;
 
+  const postsToShow = showAll ? PostData : PostData.slice(0, 4);
+
+  // console.log(postsToShow);
 
 
-
-
+console.log("Show All is:", showAll);
 
 
 
@@ -120,12 +149,12 @@ const FeaturedPosts = () => {
       <div className="container mx-auto px-4">
         {/* Featured Posts */}
         <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
+          {/* <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-blog-text">Featured Stories</h2>
             <a href="/featured" className="text-blog-primary hover:text-blog-primary-light font-medium">
               View All →
             </a>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main featured post */}
@@ -144,18 +173,17 @@ const FeaturedPosts = () => {
 
         {/* Recent Posts */}
         <div>
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-blog-text">Latest Articles</h2>
-            <a href="/recent" className="text-blog-primary hover:text-blog-primary-light font-medium">
-              View All →
-            </a>
-          </div>
+
+            {showContent}
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PostData.map((post) => (
+            {postsToShow.map((post) => (
               <BlogCard key={post.id} post={post} />
             ))}
           </div>
+
+
         </div>
       </div>
     </section>

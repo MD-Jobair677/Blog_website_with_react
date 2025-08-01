@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 
 interface User {
@@ -74,7 +75,17 @@ const BlogCard = ({ post, variant = "default" }: PostProps) => {
   const isFeature = variant === "featured";
   const isCompact = variant === "compact";
 
-  console.log(post.user)
+// const firstThreeEntries = Object.entries(post).slice(0, 3);
+// const firstThreePost = Object.fromEntries(firstThreeEntries);
+// console.log(post);
+
+// const MyComponent = ({ post }) => {
+//   useEffect(() => {
+//     console.log(firstThreePost);
+//   }, []); 
+
+//   return <div>{firstThreePost}</div>;
+// };
 
   return (
     <Card className={cn(

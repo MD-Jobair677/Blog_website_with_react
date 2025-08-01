@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 interface BlogPost {
   id: string;
@@ -28,6 +29,17 @@ const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
   const isFeature = variant === "featured";
   const isCompact = variant === "compact";
 
+  
+  const MyComponent = ({ post }) => {
+  useEffect(() => {
+    console.log(post.slice(0, 7));
+  }, []); 
+
+  return <div>...</div>;
+};
+
+  // const blog = post.slice()
+console.log(post.slice(0,1))
   return (
     <Card className={cn(
       "group cursor-pointer transition-all duration-300 hover:shadow-lg border-0 bg-card",

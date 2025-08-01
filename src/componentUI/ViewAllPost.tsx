@@ -1,21 +1,22 @@
 import Header from "@/componentUI/Header";
-import Hero from "@/componentUI/Hero";
 import FeaturedPosts from "@/componentUI/FeaturedPosts";
-import Newsletter from "@/componentUI/Newsletter";
 import Footer from "@/componentUI/Footer";
+// Corrected to accept props as an object:
+interface FeaturedPostsProps {
+  showAll?: boolean;
+}
 
-const Index = () => {
+
+const ViewAllPost = ({ showAll = false }: FeaturedPostsProps) => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
-        <Hero />
-        <FeaturedPosts showAll={false}  />
-        <Newsletter />
+      <main className="pt-10">
+        <FeaturedPosts showAll={true} /> 
       </main>
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default ViewAllPost;

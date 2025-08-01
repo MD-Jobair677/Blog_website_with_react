@@ -26,7 +26,7 @@ const Login = () => {
         if (isSuccess) {
             const timer = setTimeout(() => {
 
-                navigate('/index')
+                navigate('/')
 
             }, 200)
 

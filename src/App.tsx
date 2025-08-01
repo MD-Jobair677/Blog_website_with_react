@@ -16,7 +16,9 @@ import AddTag from "./components/dashboard/Tag/AddTag";
 import EditTag from "./components/dashboard/Tag/EditTag";
 import SingleTag from "./components/dashboard/Tag/SingleTag";
 import Comment from "@/pagesUI/Comment";
-import UserProfile from "@/components/dashboard/UserProfile/UserProfile"
+import UserProfile from "@/components/dashboard/UserProfile/UserProfile";
+import ViewAllPost from "@/componentUI/viewAllPost"
+// import { path } from 'path';
 
 
 const queryClient = new QueryClient();
@@ -38,18 +40,18 @@ const App = () => (
           {/* edit post */}
           <Route path="/edit/post/:id" element={<EditPost />} />
 
-  {/* TAG ROUTE */}
+          {/* TAG ROUTE */}
 
-  <Route path="/add/tag" element={<AddTag />} />
-  <Route path="/edit/tag/:id" element={<EditTag />} />
-  <Route path="/single/tag/:id" element={<SingleTag />} />
-  <Route path="/show/all/tag" element={<AddTag />} />
+          <Route path="/add/tag" element={<AddTag />} />
+          <Route path="/edit/tag/:id" element={<EditTag />} />
+          <Route path="/single/tag/:id" element={<SingleTag />} />
+          <Route path="/show/all/tag" element={<AddTag />} />
 
-  {/* TODO: Replace the dummy post object with real data as needed */}
-  <Route path="/comment" element={<Comment post={{ id: 1, title: "Sample Post", content: "Sample content" }} />} />
-  <Route path="/user/profile" element={<UserProfile  />} />
+          {/* TODO: Replace the dummy post object with real data as needed */}
+          <Route path="/comment" element={<Comment post={{ id: 1, title: "Sample Post", content: "Sample content" }} />} />
+          <Route path="/user/profile" element={<UserProfile />} />
 
-
+          <Route path="/view/all/post" element={<ViewAllPost />}   />
 
 
 
@@ -61,7 +63,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
 
 
-           <Route path="/index" element={<IndexUI />} />
+          <Route path="/" element={<IndexUI />} />
 
           {/* UI ROUTE */}
 

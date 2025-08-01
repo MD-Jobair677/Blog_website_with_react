@@ -10,19 +10,20 @@ import { useSingleTagQuery } from '@/redux/Tag/Tag.jsx'
 
 
 import { DashboardLayout } from '../DashboardLayout'
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EditTag = () => {
 
 
-   interface ValidationErrors {
-      name?: string[];
-    }
-  
-    const [errors, setErrors] = useState<ValidationErrors>({});
+  interface ValidationErrors {
+    name?: string[];
+  }
+
+  const [errors, setErrors] = useState<ValidationErrors>({});
 
 
-  
+  const Navigate = useNavigate()
 
   const { id } = useParams();
 
@@ -51,6 +52,10 @@ const EditTag = () => {
 
   }, [SingTagData])
 
+  if (isSuccess) {
+    Navigate('/show/all/tag')
+  }
+
 
   const handleChange = (e) => {
 
@@ -66,18 +71,18 @@ const EditTag = () => {
 
 
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  try {
-    await UpdateTagData({ id, UpdateTagData: fromData }).unwrap();
-    setErrors({});
-  } catch (error) {
-    if (error?.data?.errors) {
-      setErrors(error.data.errors);
+    try {
+      await UpdateTagData({ id, UpdateTagData: fromData }).unwrap();
+      setErrors({});
+    } catch (error) {
+      if (error?.data?.errors) {
+        setErrors(error.data.errors);
+      }
     }
-  }
-};
+  };
 
 
 
@@ -91,7 +96,7 @@ const EditTag = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left: Tag Add Form */}
           <div className="bg-white shadow-md rounded p-6">
-            <h2 className="text-xl font-semibold mb-4">Add New Tag</h2>
+            <h2 className="text-xl font-semibold mb-4">Edit  Tag</h2>
             <form onSubmit={handleSubmit}>
               <label className="block mb-2 text-gray-700 font-medium">Tag Name</label>
               <div className="flex">
@@ -110,7 +115,7 @@ const EditTag = () => {
                   className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-r-md hover:bg-blue-700"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Adding...' : 'Add'}
+                  {isLoading ? 'Editing...' : 'Edit'}
                 </button>
               </div>
               {/* Error Message */}
