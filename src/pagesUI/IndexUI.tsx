@@ -3,14 +3,20 @@ import Hero from "@/componentUI/Hero";
 import FeaturedPosts from "@/componentUI/FeaturedPosts";
 import Newsletter from "@/componentUI/Newsletter";
 import Footer from "@/componentUI/Footer";
+import { useState } from "react";
 
+// interface FeaturedPostsProps {
+//   showAll?: boolean;
+//   searchTerm?: string
+// }
 const Index = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header   searchTerm={searchTerm} onSearch={setSearchTerm}/>
       <main>
         <Hero />
-        <FeaturedPosts showAll={false}  />
+        <FeaturedPosts showAll={false} />
         <Newsletter />
       </main>
       <Footer />

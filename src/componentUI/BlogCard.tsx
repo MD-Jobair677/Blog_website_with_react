@@ -69,9 +69,10 @@ interface Post {
 type PostProps = {
   post: Post;
   variant?: "default" | "featured" | "compact";
+   searchTerm?: string;
 };
 
-const BlogCard = ({ post, variant = "default" }: PostProps) => {
+const BlogCard = ({ post, variant = "default" ,searchTerm=''}: PostProps) => {
   const isFeature = variant === "featured";
   const isCompact = variant === "compact";
 

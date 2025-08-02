@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -16,6 +17,10 @@ const Header = () => {
     { label: "About", href: "/about" },
   ];
 
+
+  
+
+ 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -46,6 +51,8 @@ const Header = () => {
             <div className="hidden md:flex relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blog-text-light h-4 w-4" />
               <Input
+              onChange={searchundle}
+              value={SearchItem}
                 placeholder="Search articles..."
                 className="pl-10 w-64 bg-blog-surface border-border focus:border-blog-primary"
               />
